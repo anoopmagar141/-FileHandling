@@ -63,3 +63,64 @@ void copyFile(const char *sourceFile, const char *destinationFile) {
     fclose(source);
     fclose(destination);
 }
+
+int main() {
+    int choice;
+    char filename[100];
+    char sourceFile[100], destinationFile[100];
+
+    while (1) {
+        printf("\nFile Operations Menu:\n");
+        printf("1. Read a file\n");
+        printf("2. Write to a file\n");
+        printf("3. Delete a file\n");
+        printf("4. Copy a file\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        getchar(); // To consume the newline character from the buffer
+
+        switch (choice) {
+            case 1:
+                printf("Enter the filename to read: ");
+                fgets(filename, sizeof(filename), stdin);
+                filename[strcspn(filename, "\n")] = 0; // Remove newline character
+                readFile(filename);
+                break;
+
+            case 2:
+                printf("Enter the filename to write to: ");
+                fgets(filename, sizeof(filename), stdin);
+                filename[strcspn(filename, "\n")] = 0; // Remove newline character
+                writeFile(filename);
+                break;
+
+            case 3:
+                printf("Enter the filename to delete: ");
+                fgets(filename, sizeof(filename), stdin);
+                filename[strcspn(filename, "\n")] = 0; // Remove newline character
+                deleteFile(filename);
+                break;
+
+            case 4:
+                printf("Enter the source filename: ");
+                fgets(sourceFile, sizeof(sourceFile), stdin);
+                sourceFile[strcspn(sourceFile, "\n")] = 0; // Remove newline character
+                printf("Enter the destination filename: ");
+                fgets(destinationFile, sizeof(destinationFile), stdin);
+                destinationFile[strcspn(destinationFile, "\n")] = 0; // Remove newline character
+                copyFile(sourceFile, destinationFile);
+                break;
+
+            case 5:
+                printf("Exiting...\n");
+                exit(0);
+
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+
+    return 0;
+
+}
